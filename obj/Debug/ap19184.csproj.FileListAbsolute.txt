@@ -1,0 +1,10 @@
+Z:\ap19184\bin\Debug\ap19184.exe.config
+Z:\ap19184\bin\Debug\ap19184.exe
+Z:\ap19184\bin\Debug\ap19184.pdb
+Z:\ap19184\obj\Debug\ap19184.csprojResolveAssemblyReference.cache
+Z:\ap19184\obj\Debug\ap19184.Form1.resources
+Z:\ap19184\obj\Debug\ap19184.Properties.Resources.resources
+Z:\ap19184\obj\Debug\ap19184.csproj.GenerateResource.Cache
+Z:\ap19184\obj\Debug\ap19184.csproj.CoreCompileInputs.cache
+Z:\ap19184\obj\Debug\ap19184.exe
+Z:\ap19184\obj\Debug\ap19184.pdb

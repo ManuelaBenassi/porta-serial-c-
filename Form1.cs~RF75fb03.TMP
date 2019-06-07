@@ -1,0 +1,99 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO.Ports;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ap19184
+{
+    
+    public partial class Form1 : Form
+    {
+        string RxString;
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            SerialPort serial = new SerialPort(this.cbxPortas.GetItemText(cbxPortas.SelectedItem.ToString()));
+            //serial.Open();
+            serial.Write("1");
+            btn1.Image = Image.FromFile("aceso.jpg");
+        }
+
+        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            SerialPort sp = (SerialPort)sender; 
+            RxString = spSerial.ReadExisting();
+        }
+
+        private void btnConectar_Click(object sender, EventArgs e)
+        {
+            if (!spSerial.IsOpen)
+            {
+                try
+                {
+                    spSerial.PortName = cbxPortas.Items[cbxPortas.SelectedIndex].ToString(); // alteramos para a porta selecionada
+                    spSerial.Open(); //abrimos a porta
+                }
+                catch
+                {
+                    return;
+                }
+                if (spSerial.IsOpen) //se abriu
+                {
+                    btnConectar.Text = "Desconectar"; // alteramos o texto do botão
+                    cbxPortas.Enabled = false; // desabilitamos a comboBox
+                }
+            }
+            else //se está aberta, a desconectaremos
+            {
+                try
+                {
+                    spSerial.Close(); // fechamos a porta serial
+                    cbxPortas.Enabled = true; // habilitamos a comboBox
+                    btnConectar.Text = "Conectar"; // mudamos o texto do botão
+                    HabilitarBotoes();
+                    VoltarImagens();
+                }
+                catch
+                {
+                    return;
+                }
+            }
+        }
+        private void trataDadoRecebido()
+        {
+            if (RxString == "0") //se acabou  o efeito
+            {
+                HabilitarBotoes(); //habilitamos os botões
+                VoltarImagens(); // voltamos as imagens originais
+            }
+        }
+        void HabilitarBotoes() //habilita os botões
+        {
+            btnConectar.Enabled = true;
+            btn1.Enabled = true;
+            btn2.Enabled = true;
+            btn3.Enabled = true;
+            btn4.Enabled = true;
+            btn5.Enabled = true;
+        }
+        void VoltarImagens() // volta as imagens normais
+        {
+            btn1.Image = Properties.Resources.LED1ON;
+            btn2.Image = Properties.Resources.LED2OFF;
+            btn3.Image = Properties.Resources.LED3OFF;
+            btn4.Image = Properties.Resources.LED1OFF;
+            btn5.Image = Properties.Resources.LED3ON;
+        }
+    }
+   
+}
